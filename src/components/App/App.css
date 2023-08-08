@@ -1,0 +1,64 @@
+@import url('../../vendor/normalize.css');
+@import url('../../vendor/fonts/fonts.css');
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #202020;
+  margin: 0 auto;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  color: #fff;
+}
+
+.content {
+  flex: 1 1 auto;
+}
+
+.content-box {
+  max-width: 1280px;
+  min-width: 320px;
+  margin: 0 auto;
+}
+
+.title {
+  width: 100%;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.88px;
+  margin: 0;
+  padding: 0 0 23px;
+  border-bottom: 1px solid #DADADA;
+}
+
+.button {
+  transition: opacity 200ms ease;
+  outline: 0;
+  cursor: pointer;
+}
+
+.button:hover {
+  opacity: .8;
+}
+
+.link {
+  transition: opacity 200ms ease;
+}
+
+.link:hover {
+  opacity: .7;
+}
+
+@media screen and (max-width: 660px) {
+  .title {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+    padding-bottom: 28px;
+  }
+}
