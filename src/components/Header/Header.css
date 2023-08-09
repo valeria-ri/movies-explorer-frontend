@@ -1,0 +1,35 @@
+.header {
+  background-color: #202020;
+}
+
+.header_hidden {
+  display: none;
+}
+
+.header_type_landing {
+  background-color: #073042;
+}
+
+.header__content-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 70px;
+  box-sizing: border-box;
+}
+
+.header__logo {
+  width: 38px;
+}
+
+@media screen and (max-width: 1080px) {
+  .header__content-box {
+    padding: 18px 30px;
+  }
+}
+
+@media screen and (max-width: 660px) {
+  .header__content-box {
+    padding: 18px 14px;
+  }
+}
