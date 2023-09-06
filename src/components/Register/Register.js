@@ -1,10 +1,29 @@
 import React from 'react';
 import AuthBlock from '../AuthBlock/AuthBlock';
+import useForm from '../../hooks/useForm';
 
-function Register() {
+function Register({registerUser}) {
+
+  const { form, errors, handleChange, isValid } = useForm({
+    email: '',
+    password: '',
+    name: '',
+  });
+
+  function handleSubmit (e) {
+    e.preventDefault();
+    registerUser(form);
+  }
+
+  function getErrorClassName (name) {
+    return `auth__input-error ${errors[name] ? 'auth__input-error_visible' : ''}`
+  }
+
   return(
     <main className='content'>
       <AuthBlock 
+        handleSubmit={handleSubmit}
+        isValid={isValid}
         welcomeText='Добро пожаловать!'
         formName='signup'
         btnText='Зарегистрироваться'
@@ -20,8 +39,13 @@ function Register() {
             name='name'
             placeholder='Имя'
             id='name'
+            value={form.name}
+            onChange={handleChange}
+            minLength='2'
+            maxLength='30'
+            required
           />
-          <span className='auth__input-error auth__input-error_type_username'></span>
+          <span className={getErrorClassName('name')}>{errors.name}</span>
         </fieldset>
         <fieldset className='auth__field'>
           <label className='auth__input-title'>E-mail</label>
@@ -31,8 +55,11 @@ function Register() {
             name='email'
             placeholder='E-mail'
             id='email'
+            value={form.email}
+            onChange={handleChange}
+            required
           />
-          <span className='auth__input-error auth__input-error_type_email'></span>
+          <span className={getErrorClassName('email')}>{errors.email}</span>
         </fieldset>
         <fieldset className='auth__field'>
           <label className='auth__input-title'>Пароль</label>
@@ -42,8 +69,13 @@ function Register() {
             name='password'
             placeholder='Пароль'
             id='password'
+            value={form.password}
+            onChange={handleChange}
+            minLength='8'
+            required
+            noValidate
           />
-          <span className='auth__input-error auth__input-error_type_password'></span>
+          <span className={getErrorClassName('password')}>{errors.password}</span>
         </fieldset>
       </AuthBlock>
     </main>
