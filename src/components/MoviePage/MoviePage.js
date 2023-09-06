@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import { filterMovies } from '../../utils/utils';
@@ -18,6 +18,14 @@ function MoviePage({ getMovies, movies }) {
   //     checkbox: false,
   //   })
   // }, [keyword]);
+
+  useEffect(() => {
+    if (movies.length === 0 && getMovies) {
+      return;
+    }
+    setFilteredMovies(filterMovies(movies, form.keyword, form.checkbox));
+  }, [movies, form.checkbox]);
+
 
   function searchMovies (keyword, isShort) {
     if (movies.length === 0 && getMovies) {
