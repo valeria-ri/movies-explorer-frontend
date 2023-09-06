@@ -18,6 +18,10 @@ function moviesFormat(movies) {
   })
 }
 
+function durationFormat(time) {
+  return `${Math.floor(time / 60)}ч ${time % 60}м`;
+}
+
 function filterMovies(movies, keyword, isShort) {
   const checkInclude = (item) => {
     return item.toLowerCase().includes(keyword.toLowerCase())
@@ -26,7 +30,7 @@ function filterMovies(movies, keyword, isShort) {
   const filteredByKeywordMovies = movies.filter((movie) => {
     return checkInclude(movie.nameRU) || checkInclude(movie.nameEN);
   })
-  
+
   if (isShort) {
     const shortMovies = filteredByKeywordMovies.filter((movie) => {
       return movie.duration <= 40;
@@ -39,5 +43,6 @@ function filterMovies(movies, keyword, isShort) {
 
 export {
   moviesFormat,
+  durationFormat,
   filterMovies
 };

@@ -1,4 +1,5 @@
 import { useLocation } from 'react-router-dom';
+import { durationFormat } from '../../utils/utils';
 import './MoviesCard.css';
 
 function MoviesCard({movie, isSaved}) {
@@ -16,7 +17,7 @@ function MoviesCard({movie, isSaved}) {
       <div className='movies-card__info'>
         <div className='movies-card__description'>
           <h2 className='movies-card__movie-name'>{movie.nameRU}</h2>
-          <p className='movies-card__duration'>{movie.duration}</p>
+          <p className='movies-card__duration'>{durationFormat(movie.duration)}</p>
         </div>
         <button className={btnClassName} type='button' />
       </div>
