@@ -7,6 +7,8 @@ const useForm = (initialState) => {
   
   const handleChange = (e) => {
     const input = e.target;
+
+    console.log(input.checked);
     
     setErrors({
       ...errors,
@@ -15,7 +17,7 @@ const useForm = (initialState) => {
 
     setForm({
       ...form,
-      [input.name]: input.value,
+      [input.name]: input.type === 'checkbox' ? input.checked : input.value,
     });
 
     setIsValid(e.target.closest('form').checkValidity());
