@@ -20,7 +20,7 @@ function MoviePage({ getMovies, movies }) {
   // }, [keyword]);
 
   function searchMovies (keyword, isShort) {
-    if (movies.length === 0) {
+    if (movies.length === 0 && getMovies) {
       getMovies();
     } else {
       setFilteredMovies(filterMovies(movies, keyword, isShort));
