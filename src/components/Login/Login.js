@@ -1,4 +1,3 @@
-import React from 'react';
 import AuthBlock from '../AuthBlock/AuthBlock';
 import useForm from '../../hooks/useForm';
 
