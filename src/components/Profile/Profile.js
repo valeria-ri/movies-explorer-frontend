@@ -23,6 +23,11 @@ function Profile({handleUpdateUser, logOut}) {
     })
   }, [currentUser]);
 
+  useEffect(() => {
+    if (!isEdited) return;
+    setServerMessage('');
+  }, [isEdited])
+
   function handleSubmit (e) {
     e.preventDefault();
     handleUpdateUser(form)
@@ -101,6 +106,7 @@ function Profile({handleUpdateUser, logOut}) {
           </div>
           :
           <div className='profile__actions profile__actions_type_profile'>
+            <span className={serverMessageClassName}>{serverMessage}</span>
             <button className='profile__button profile__button_type_edit button' type='button' onClick={handleEditMode}>Редактировать</button>
             <button className='profile__button profile__button_type_logout button' type='button' onClick={logOut}>Выйти из аккаунта</button>
           </div>
