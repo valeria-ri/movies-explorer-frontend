@@ -12,7 +12,7 @@ MoviesExplorer — сервис поиска фильмов по ключевы�
 ### Технологии
 
 * React
-* API
+* REST API
 * Flex layout
 * Grid layout
 
