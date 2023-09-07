@@ -16,6 +16,7 @@ import Login from '../Login/Login';
 import NotFound from '../NotFound/NotFound';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import './App.css';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
   const [token, setToken] = useState('');
@@ -132,14 +133,16 @@ function App() {
               <Login loginUser={loginUser} />
             } 
           />
-          <Route path='/movies' element={<Movies />} />
-          <Route path='/saved-movies' element={<SavedMovies />} />
-          <Route 
-            path='/profile' 
-            element={
-              <Profile logOut={logOut} handleUpdateUser={handleUpdateUser}/>
-            } 
-          />
+          <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />} >
+            <Route path='/movies' element={<Movies />} />
+            <Route path='/saved-movies' element={<SavedMovies />} />
+            <Route 
+              path='/profile' 
+              element={
+                <Profile logOut={logOut} handleUpdateUser={handleUpdateUser}/>
+              } 
+            />
+          </Route>
           <Route path='*' element={<NotFound />} />
         </Routes>
         <Footer />
