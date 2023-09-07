@@ -61,7 +61,7 @@ function Profile({handleUpdateUser, logOut}) {
  const serverMessageClassName = `profile__server-message ${serverMessageSuccessMode ? 'profile__server-message_success' : ''}`;
 
   return (
-    <main className='profile content content-box'>
+    <main className='profile'>
       <h1 className='profile__welcome'>Привет, {currentUser.name}!</h1>
       <form className='profile__form' name='profile' onSubmit={handleSubmit}>
         <fieldset className='profile__field'>
