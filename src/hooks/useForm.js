@@ -14,6 +14,7 @@ const useForm = (initialState) => {
       if (input.type === 'email') {
         return isEmail(input.value);
       }
+      return true;
     }
     
     setErrors({
