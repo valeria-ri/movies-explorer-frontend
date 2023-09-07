@@ -17,9 +17,10 @@ import NotFound from '../NotFound/NotFound';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import './App.css';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import Preloader from '../Preloader/Preloader';
 
 function App() {
-  const [token, setToken] = useState('');
+  // const [token, setToken] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -32,11 +33,8 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const jwt = localStorage.getItem('jwt');
-    setToken(jwt);
-  }, [])
+    const token = localStorage.getItem('jwt');
 
-  useEffect(() => {
     if (!token) {
       setIsLoading(false);
       return;
@@ -51,7 +49,7 @@ function App() {
       })
       .catch(console.error)
       .finally(() => setIsLoading(false))
-  }, [token])
+  }, [])
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -94,8 +92,6 @@ function App() {
   function logOut() {
     localStorage.removeItem('jwt');
     setIsLoggedIn(false);
-    setToken('');
-    navigate('/');
   }
 
   function handleUpdateUser({ email, name }) {
@@ -114,6 +110,8 @@ function App() {
   function closeBurgerMenu() {
     setIsMenuOpened(false);
   }
+
+  if (isLoading) return (<Preloader/>)
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
