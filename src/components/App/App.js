@@ -18,6 +18,7 @@ import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import './App.css';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Preloader from '../Preloader/Preloader';
+import { moviesFormat } from '../../utils/utils';
 
 function App() {
   // const [token, setToken] = useState('');
@@ -26,7 +27,7 @@ function App() {
 
   const [currentUser, setCurrentUser] = useState({});
   const [savedMovies, setSavedMovies] = useState([]);
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState(restoreMovies());
 
   const [isMenuOpened, setIsMenuOpened] = useState(false);
 
@@ -111,6 +112,25 @@ function App() {
     setIsMenuOpened(false);
   }
 
+  // ФИЛЬМЫ
+
+  function restoreMovies() {
+    return JSON.parse(localStorage.getItem('movies') ?? '[]');
+  }
+
+  function getMovies() {
+    setIsLoading(true);
+    moviesApi
+      .getMovies()
+      .then((newMovies) => {
+        const formattedMovies = moviesFormat(newMovies)
+        setMovies(formattedMovies);
+        localStorage.setItem('movies', JSON.stringify(formattedMovies));
+      })
+      .catch(console.error)
+      .finally(() => setIsLoading(false))
+  }
+
   if (isLoading) return (<Preloader/>)
 
   return (
@@ -132,7 +152,7 @@ function App() {
             } 
           />
           <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />} >
-            <Route path='/movies' element={<Movies />} />
+            <Route path='/movies' element={<Movies getMovies={getMovies} movies={movies} />} />
             <Route path='/saved-movies' element={<SavedMovies />} />
             <Route 
               path='/profile' 

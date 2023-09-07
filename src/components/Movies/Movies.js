@@ -7,27 +7,7 @@ import { moviesFormat, filterMovies } from '../../utils/utils';
 import Preloader from '../Preloader/Preloader';
 import MoviePage from '../MoviePage/MoviePage';
 
-function Movies() {
-  const [movies, setMovies] = useState(restoreMovies());
-  const [isLoading, setIsLoading] = useState(false);
-
-  function restoreMovies() {
-    return JSON.parse(localStorage.getItem('movies') ?? '[]');
-  }
-
-  function getMovies() {
-    setIsLoading(true);
-    moviesApi
-      .getMovies()
-      .then((newMovies) => {
-        const formattedMovies = moviesFormat(newMovies)
-        setMovies(formattedMovies);
-        localStorage.setItem('movies', JSON.stringify(formattedMovies));
-      })
-      .catch(console.error)
-      .finally(() => setIsLoading(false))
-  }
-
+function Movies({getMovies, movies}) {
   return (
     <MoviePage getMovies={getMovies} movies={movies} />
   )
