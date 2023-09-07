@@ -4,7 +4,7 @@ import './MoviesCard.css';
 
 function MoviesCard({movie, isSaved}) {
   const location = useLocation();
-  const saveBtnClassName = `movies-card__save-btn ${isSaved ? 'movies-card__save-btn_active' : ''}`;
+  const saveBtnClassName = `movies-card__save-btn ${isSaved && 'movies-card__save-btn_active'}`;
   const deleteBtnClassName = 'movies-card__delete-btn';
   const btnClassName = `movies-card__btn 
     ${

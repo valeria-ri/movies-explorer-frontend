@@ -17,7 +17,6 @@ function MoviePage({ getMovies, movies }) {
     setFilteredMovies(filterMovies(movies, form.keyword, form.checkbox));
   }, [movies, form.checkbox]);
 
-
   function searchMovies (keyword, isShort) {
     if (movies.length === 0 && getMovies) {
       getMovies();

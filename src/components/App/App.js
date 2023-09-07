@@ -112,7 +112,7 @@ function App() {
     setIsMenuOpened(false);
   }
 
-  // ФИЛЬМЫ
+  // ВСЕ ФИЛЬМЫ
 
   function restoreMovies() {
     return JSON.parse(localStorage.getItem('movies') ?? '[]');
@@ -130,6 +130,16 @@ function App() {
       .catch(console.error)
       .finally(() => setIsLoading(false))
   }
+
+  // СОХРАНЕНИЕ ФИЛЬМОВ
+
+  function handleSaveMovie(movie) {
+    mainApi.createMovie(movie)
+    .then(newMovie => {
+      setSavedMovies()
+    })
+  }
+
 
   if (isLoading) return (<Preloader/>)
 
@@ -153,7 +163,7 @@ function App() {
           />
           <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />} >
             <Route path='/movies' element={<Movies getMovies={getMovies} movies={movies} />} />
-            <Route path='/saved-movies' element={<SavedMovies />} />
+            <Route path='/saved-movies' element={<SavedMovies movies={savedMovies} />} />
             <Route 
               path='/profile' 
               element={
