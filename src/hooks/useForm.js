@@ -8,17 +8,19 @@ const useForm = (initialState) => {
   
   const handleChange = (e) => {
     const input = e.target;
+    const customErrorMessage = 'Неверный формат email';
 
     const isInputValid = (input) => {
-
-      if (input.name === 'email') {
+      if (input.type === 'email') {
         return isEmail(input.value);
       }
     }
     
     setErrors({
       ...errors,
-      [input.name]: input.validationMessage,
+      [input.name]: input.type === 'email' && !isInputValid(input) 
+        ? customErrorMessage 
+        : input.validationMessage,
     })
 
     setForm({
