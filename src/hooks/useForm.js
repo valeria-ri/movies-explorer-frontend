@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import isEmail from 'validator/lib/isEmail';
 
 const useForm = (initialState) => {
   const [form, setForm] = useState(initialState);
@@ -8,7 +9,12 @@ const useForm = (initialState) => {
   const handleChange = (e) => {
     const input = e.target;
 
-    console.log(input.checked);
+    const isInputValid = (input) => {
+
+      if (input.name === 'email') {
+        return isEmail(input.value);
+      }
+    }
     
     setErrors({
       ...errors,
@@ -20,7 +26,7 @@ const useForm = (initialState) => {
       [input.name]: input.type === 'checkbox' ? input.checked : input.value,
     });
 
-    setIsValid(e.target.closest('form').checkValidity());
+    setIsValid(e.target.closest('form').checkValidity() && isInputValid(e.target));
   };
 
   const resetForm = useCallback(
