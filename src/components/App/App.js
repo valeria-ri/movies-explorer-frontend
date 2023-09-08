@@ -60,7 +60,7 @@ function App() {
       ])
       .then(([userData, savedMoviesData]) => {
         setCurrentUser(userData);
-        setSavedMovies(savedMoviesData);
+        setSavedMovies(savedMoviesData.reverse());
       })
       .catch(console.error);
     }
