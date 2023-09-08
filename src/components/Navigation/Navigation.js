@@ -2,10 +2,10 @@ import { NavLink, useLocation } from 'react-router-dom';
 import './Navigation.css';
 
 function Navigation({ isLoggedIn, onBurgerClick }) {
-  const location = useLocation();
+  const location = useLocation().pathname;
   const navClassName = `navigation ${isLoggedIn ? '' : 'navigation_unauth'}`;
-  const movieActiveLinkClassName = (location.pathname === '/movies') ? 'navigation__link_active' : '';
-  const savedMovieActiveLinkClassName = (location.pathname === '/saved-movies') ? 'navigation__link_active' : '';
+  const movieActiveLinkClassName = (location === '/movies') ? 'navigation__link_active' : '';
+  const savedMovieActiveLinkClassName = (location === '/saved-movies') ? 'navigation__link_active' : '';
 
   return (
     <>

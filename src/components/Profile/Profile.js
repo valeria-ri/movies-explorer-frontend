@@ -5,7 +5,6 @@ import './Profile.css';
 
 function Profile({handleUpdateUser, logOut}) {
   const [isEdited, setIsEdited] = useState(false);
-  // const [isCorrect, setIsCorrect] = useState(true);
   const [serverMessage, setServerMessage] = useState('');
   const [serverMessageSuccessMode, setServerMessageSuccessMode] = useState(false);
 
@@ -34,18 +33,12 @@ function Profile({handleUpdateUser, logOut}) {
       .then(() => {
         setIsEdited(false);
         setServerMessage('Данные обновлены')
-        // Можно добавить стейт для успешного сообщения, который управляет новым классом
         setServerMessageSuccessMode(true);
       })
       .catch((errorCode) => {
-        // setIsCorrect(false);
         setServerMessageSuccessMode(false);
-        if (errorCode === 400) {
-          return setServerMessage('Данные некорректны')
-        }
-        if (errorCode === 409) {
-          return setServerMessage('Пользователь с данным email уже существует')
-        }
+        if (errorCode === 400) return setServerMessage('Данные некорректны');
+        if (errorCode === 409) return setServerMessage('Пользователь с данным email уже существует');
         setServerMessage('На сервере произошла ошибка')
       });
   }
@@ -54,10 +47,6 @@ function Profile({handleUpdateUser, logOut}) {
     setServerMessage('');
     setIsEdited(true);
   }
-
-  // function getErrorClassName (name) {
-  //   return `profile__error${errors[name] ? '_hidden' : ''}`
-  // }
 
   function getErrorClassName (name) {
     return `profile__input-error ${errors[name] ? 'profile__input-error_visible' : ''}`

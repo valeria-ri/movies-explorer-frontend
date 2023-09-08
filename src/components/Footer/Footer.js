@@ -2,12 +2,12 @@ import { useLocation } from 'react-router-dom';
 import './Footer.css';
 
 function Footer() {
-  const location = useLocation();
+  const location = useLocation().pathname;
   const footerClassName = `footer${
     (
-      location.pathname === '/' ||
-      location.pathname === '/movies' || 
-      location.pathname === '/saved-movies'
+      location === '/' ||
+      location === '/movies' || 
+      location === '/saved-movies'
     ) ? '' :
     '_hidden'
   }`;

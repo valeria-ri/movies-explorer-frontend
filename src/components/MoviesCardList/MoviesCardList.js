@@ -2,7 +2,7 @@ import { useLocation } from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 
-function MoviesCardList({filteredMovies, onSaveMovie, onDeleteMovie, isSavedCheck}) {
+function MoviesCardList({ filteredMovies, onSaveMovie, onDeleteMovie, isSavedCheck }) {
   const location = useLocation();
 
   return (
@@ -13,9 +13,6 @@ function MoviesCardList({filteredMovies, onSaveMovie, onDeleteMovie, isSavedChec
           <MoviesCard 
             key={movie._id || movie.movieId}
             movie={movie}
-            // image={movie.image}
-            // nameRU={movie.nameRU}
-            // duration={movie.duration}
             onSaveMovie={onSaveMovie}
             onDeleteMovie={onDeleteMovie}
             isSavedCheck={isSavedCheck}
@@ -23,6 +20,7 @@ function MoviesCardList({filteredMovies, onSaveMovie, onDeleteMovie, isSavedChec
           ))
         }
       </ul>
+      
       {/* {(location.pathname === '/movies') && <button className='movies-card-list__button button' type='button'>Ещё</button>} */}
     </section>
   )

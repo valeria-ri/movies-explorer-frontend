@@ -15,13 +15,13 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import NotFound from '../NotFound/NotFound';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
-import './App.css';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Preloader from '../Preloader/Preloader';
+
 import { moviesFormat } from '../../utils/utils';
+import './App.css';
 
 function App() {
-  // const [token, setToken] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -43,10 +43,9 @@ function App() {
 
     mainApi
       .getUserData(token)
-      .then((res) => {
+      .then(() => {
         mainApi.setToken(token);
         setIsLoggedIn(true);
-        // setCurrentUser(res);
       })
       .catch(console.error)
       .finally(() => setIsLoading(false))
@@ -66,15 +65,12 @@ function App() {
     }
   }, [isLoggedIn])
 
+  // РЕГИСТРАЦИЯ И АВТОРИЗАЦИЯ
+
   function registerUser({ email, password, name }) {
     mainApi
       .register({ email, password, name })
-      .then(() => {
-        // setCurrentUser({ email, name });
-        // console.log(userData);
-        loginUser({ email, password });
-        // navigate('/movies');
-      })
+      .then(() => loginUser({ email, password }))
       .catch(console.error);
   }
 
@@ -95,14 +91,15 @@ function App() {
     setIsLoggedIn(false);
   }
 
+  // ОБНОВЛЕНИЕ ДАННЫХ ПРОФИЛЯ
+
   function handleUpdateUser({ email, name }) {
     return mainApi
       .updateUserInfo({ email, name })
-      .then((data) => {
-        setCurrentUser(data);
-      })
-      // .catch(console.error);
+      .then((data) => setCurrentUser(data))
   }
+
+  // УПРАВЛЕНИЕ БУРГЕР-МЕНЮ
 
   function handleBurgerClick() {
     setIsMenuOpened(true);
@@ -152,7 +149,11 @@ function App() {
     return savedMovies.some(i => (i._id === movie._id) || (i.movieId === movie.movieId));
   }
 
+  // ПРЕЛОАДЕР
+
   if (isLoading) return (<Preloader/>)
+
+  // ОТРИСОВКА КОМПОНЕНТОВ
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
