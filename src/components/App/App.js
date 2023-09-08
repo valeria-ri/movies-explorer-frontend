@@ -131,15 +131,22 @@ function App() {
       .finally(() => setIsLoading(false))
   }
 
-  // СОХРАНЕНИЕ ФИЛЬМОВ
+  // СОХРАНЕНИЕ И УДАЛЕНИЕ ФИЛЬМОВ
 
   function handleSaveMovie(movie) {
     mainApi.createMovie(movie)
-    .then(newMovie => {
-      setSavedMovies()
-    })
+      .then(newMovie => {
+        setSavedMovies([newMovie, ...savedMovies]);
+        console.log(savedMovies);
+      })
+      .catch(console.error)
   }
 
+  function handleDeleteMovie(movie) {
+    mainApi.deleteMovie(movie._id || movie.movieId)
+      .then(() => setSavedMovies(state => state.filter(item => item._id !== (movie._id || movie.movieId))))
+      .catch(console.error)
+  }
 
   if (isLoading) return (<Preloader/>)
 
@@ -161,9 +168,21 @@ function App() {
               <Login loginUser={loginUser} />
             } 
           />
+
+          {/* ЗАЩИЩЁННЫЙ РОУТ */}
           <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />} >
-            <Route path='/movies' element={<Movies getMovies={getMovies} movies={movies} />} />
-            <Route path='/saved-movies' element={<SavedMovies movies={savedMovies} />} />
+            <Route 
+              path='/movies' 
+              element={
+                <Movies getMovies={getMovies} onSaveMovie={handleSaveMovie} movies={movies} />
+              } 
+            />
+            <Route 
+              path='/saved-movies' 
+              element={
+                <SavedMovies movies={savedMovies} onDeleteMovie={handleDeleteMovie} />
+              } 
+            />
             <Route 
               path='/profile' 
               element={
@@ -171,6 +190,7 @@ function App() {
               } 
             />
           </Route>
+
           <Route path='*' element={<NotFound />} />
         </Routes>
         <Footer />

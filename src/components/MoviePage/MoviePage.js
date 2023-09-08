@@ -5,7 +5,7 @@ import { filterMovies } from '../../utils/utils';
 import useForm from '../../hooks/useForm';
 import { useLocation } from 'react-router-dom';
 
-function MoviePage({ getMovies, movies }) {
+function MoviePage({ getMovies, movies, onSaveMovie, onDeleteMovie }) {
   const location = useLocation().pathname;
 
   const [filteredMovies, setFilteredMovies] = useState(restorePrevSearch().filteredMovies);
@@ -55,7 +55,7 @@ function MoviePage({ getMovies, movies }) {
   return (
     <main className='content'>
       <SearchForm form={form} handleChange={handleChange} searchMovies={searchMovies} />
-      <MoviesCardList filteredMovies={filteredMovies} />
+      <MoviesCardList filteredMovies={filteredMovies} onSaveMovie={onSaveMovie} onDeleteMovie={onDeleteMovie} />
     </main>
   )
 }

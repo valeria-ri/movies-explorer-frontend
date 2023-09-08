@@ -2,7 +2,7 @@ import { useLocation } from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 
-function MoviesCardList({filteredMovies}) {
+function MoviesCardList({filteredMovies, onSaveMovie, onDeleteMovie}) {
   const location = useLocation();
 
   return (
@@ -16,6 +16,8 @@ function MoviesCardList({filteredMovies}) {
             image={movie.image}
             nameRU={movie.nameRU}
             duration={movie.duration}
+            onSaveMovie={onSaveMovie}
+            onDeleteMovie={onDeleteMovie}
           />
           ))
         }

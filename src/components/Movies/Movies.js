@@ -7,9 +7,9 @@ import { moviesFormat, filterMovies } from '../../utils/utils';
 import Preloader from '../Preloader/Preloader';
 import MoviePage from '../MoviePage/MoviePage';
 
-function Movies({getMovies, movies}) {
+function Movies({getMovies, movies, onSaveMovie}) {
   return (
-    <MoviePage getMovies={getMovies} movies={movies} />
+    <MoviePage getMovies={getMovies} movies={movies} onSaveMovie={onSaveMovie} />
   )
 }
 
