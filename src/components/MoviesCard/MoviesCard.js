@@ -1,11 +1,13 @@
 import { useLocation } from 'react-router-dom';
 import { durationFormat } from '../../utils/utils';
 import './MoviesCard.css';
+import { useState } from 'react';
 
-function MoviesCard({movie, isSaved, onSaveMovie, onDeleteMovie}) {
+function MoviesCard({movie, onSaveMovie, onDeleteMovie, isSavedCheck}) {
   const location = useLocation().pathname;
-  const saveBtnClassName = `movies-card__save-btn ${isSaved && 'movies-card__save-btn_active'}`;
-  // const saveBtnClassName = 'movies-card__save-btn button';
+  const isSaved = isSavedCheck(movie);
+
+  const saveBtnClassName = `movies-card__save-btn${isSaved ? ' movies-card__save-btn_active' : ''}`;
   const deleteBtnClassName = 'movies-card__delete-btn';
   const btnClassName = `movies-card__btn 
     ${
@@ -14,7 +16,9 @@ function MoviesCard({movie, isSaved, onSaveMovie, onDeleteMovie}) {
     } button`;
 
   function handleSaveClick() {
-    onSaveMovie(movie);
+    if (!isSaved) {
+      onSaveMovie(movie);
+    }
   }
 
   function handleDeleteClick() {
@@ -28,7 +32,6 @@ function MoviesCard({movie, isSaved, onSaveMovie, onDeleteMovie}) {
           <h2 className='movies-card__movie-name'>{movie.nameRU}</h2>
           <p className='movies-card__duration'>{durationFormat(movie.duration)}</p>
         </div>
-        {/* <button className={btnClassName} type='button' onClick={handleClick} /> */}
         {(location === '/movies') && <button className={btnClassName} type='button' onClick={handleSaveClick} />}
         {(location === '/saved-movies') && <button className={btnClassName} type='button' onClick={handleDeleteClick} />}
       </div>

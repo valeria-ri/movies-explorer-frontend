@@ -1,8 +1,8 @@
 import MoviePage from '../MoviePage/MoviePage';
 
-function SavedMovies({ movies, onDeleteMovie }) {
+function SavedMovies({ movies, onDeleteMovie, isSavedCheck }) {
   return (
-    <MoviePage movies={movies} onDeleteMovie={onDeleteMovie} />
+    <MoviePage movies={movies} onDeleteMovie={onDeleteMovie} isSavedCheck={isSavedCheck} />
   )
 }
 
