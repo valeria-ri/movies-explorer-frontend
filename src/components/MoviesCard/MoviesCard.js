@@ -16,9 +16,7 @@ function MoviesCard({movie, onSaveMovie, onDeleteMovie, isSavedCheck}) {
     } button`;
 
   function handleSaveClick() {
-    if (!isSaved) {
-      onSaveMovie(movie);
-    }
+    !isSaved && onSaveMovie(movie);
   }
 
   function handleDeleteClick() {
@@ -32,7 +30,7 @@ function MoviesCard({movie, onSaveMovie, onDeleteMovie, isSavedCheck}) {
           <h2 className='movies-card__movie-name'>{movie.nameRU}</h2>
           <p className='movies-card__duration'>{durationFormat(movie.duration)}</p>
         </div>
-        {(location === '/movies') && <button className={btnClassName} type='button' onClick={handleSaveClick} />}
+        {(location === '/movies') && <button className={btnClassName} type='button' onClick={!isSaved ? handleSaveClick : handleDeleteClick} />}
         {(location === '/saved-movies') && <button className={btnClassName} type='button' onClick={handleDeleteClick} />}
       </div>
       <img className='movies-card__image' src={movie.image} alt={movie.nameRU} />

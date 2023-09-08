@@ -141,9 +141,10 @@ function App() {
   }
 
   function handleDeleteMovie(movie) {
+    const movieId = movie._id || savedMovies.find(i => i.movieId === movie.movieId)._id;
     mainApi
-      .deleteMovie(movie._id || movie.movieId)
-      .then(() => setSavedMovies(state => state.filter(i => (i._id !== movie._id) || (i.movieId !== movie.movieId))))
+      .deleteMovie(movieId)
+      .then(() => setSavedMovies(state => state.filter(i => i._id !== movieId)))
       .catch(console.error)
   }
 
@@ -177,7 +178,7 @@ function App() {
             <Route 
               path='/movies' 
               element={
-                <Movies movies={movies} getMovies={getMovies} onSaveMovie={handleSaveMovie} isSavedCheck={isSavedCheck} />
+                <Movies movies={movies} getMovies={getMovies} onSaveMovie={handleSaveMovie} onDeleteMovie={handleDeleteMovie} isSavedCheck={isSavedCheck} />
               } 
             />
             <Route 

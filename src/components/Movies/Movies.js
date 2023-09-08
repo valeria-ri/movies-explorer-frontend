@@ -7,9 +7,9 @@ import { moviesFormat, filterMovies } from '../../utils/utils';
 import Preloader from '../Preloader/Preloader';
 import MoviePage from '../MoviePage/MoviePage';
 
-function Movies({getMovies, movies, onSaveMovie, isSavedCheck}) {
+function Movies({getMovies, movies, onSaveMovie, onDeleteMovie, isSavedCheck}) {
   return (
-    <MoviePage getMovies={getMovies} movies={movies} onSaveMovie={onSaveMovie} isSavedCheck={isSavedCheck} />
+    <MoviePage getMovies={getMovies} movies={movies} onSaveMovie={onSaveMovie} onDeleteMovie={onDeleteMovie} isSavedCheck={isSavedCheck} />
   )
 }
 
