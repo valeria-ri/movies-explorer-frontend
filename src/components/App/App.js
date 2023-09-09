@@ -33,6 +33,8 @@ function App() {
 
   const navigate = useNavigate();
 
+  // ПРОВЕРКА ТОКЕНА
+
   useEffect(() => {
     const token = localStorage.getItem('jwt');
 
@@ -77,7 +79,7 @@ function App() {
   function loginUser({ email, password }) {
     mainApi
       .authorize({ email, password })
-      .then((res) => {
+      .then(res => {
         setIsLoggedIn(true);
         mainApi.setToken(res.token);
         localStorage.setItem('jwt', res.token);
@@ -151,7 +153,7 @@ function App() {
 
   // ПРЕЛОАДЕР
 
-  if (isLoading) return (<Preloader/>)
+  if (isLoading) return (<Preloader type='page' />)
 
   // ОТРИСОВКА КОМПОНЕНТОВ
 

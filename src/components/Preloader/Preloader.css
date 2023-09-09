@@ -50,6 +50,12 @@
   box-sizing: border-box;
 }
 
+.preloader_type_page {
+  width: 100vw;
+  height: 100vh;
+  background-color: #202020;
+}
+
 .preloader__container {
   width: 100px;
   height: 100px;
