@@ -9,7 +9,7 @@ function MoviesCardList({ filteredMovies, onSaveMovie, onDeleteMovie, isSavedChe
   const location = useLocation().pathname;
   const [moviesAmount, setMoviesAmount] = useState('');
   const [addAmount, setAddAmount] = useState('');
-
+  
   const windowWidth = useResize();
   
   useEffect(() => {
@@ -40,7 +40,10 @@ function MoviesCardList({ filteredMovies, onSaveMovie, onDeleteMovie, isSavedChe
         }
       </ul>
 
-      {(location === '/movies') && <button className='movies-card-list__button button' type='button' onClick={onMoreBtnClick}>Ещё</button>}
+      {
+        (location === '/movies' && (moviesAmount < filteredMovies.length)) 
+        && <button className='movies-card-list__button button' type='button' onClick={onMoreBtnClick}>Ещё</button>
+      }
     </section>
   )
 }
