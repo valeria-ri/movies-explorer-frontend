@@ -9,6 +9,7 @@ function MoviePage({ getMovies, movies, onSaveMovie, onDeleteMovie, isSavedCheck
   const location = useLocation().pathname;
 
   const [filteredMovies, setFilteredMovies] = useState(restorePrevSearch().filteredMovies);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const { form, handleChange } = useForm(restorePrevSearch().form);
 
@@ -21,7 +22,13 @@ function MoviePage({ getMovies, movies, onSaveMovie, onDeleteMovie, isSavedCheck
     if (movies.length === 0 && getMovies) {
       getMovies();
     } else {
-      setFilteredMovies(filterMovies(movies, keyword, isShort));      
+      if (keyword.length === 0) {
+        setErrorMessage('Нужно ввести ключевое слово');
+        setFilteredMovies([]);
+      } else {
+        setErrorMessage('');
+        setFilteredMovies(filterMovies(movies, keyword, isShort));
+      }      
     }
   }
 
@@ -54,7 +61,7 @@ function MoviePage({ getMovies, movies, onSaveMovie, onDeleteMovie, isSavedCheck
 
   return (
     <main className='content'>
-      <SearchForm form={form} handleChange={handleChange} searchMovies={searchMovies} />
+      <SearchForm form={form} handleChange={handleChange} searchMovies={searchMovies} errorMessage={errorMessage} />
       <MoviesCardList filteredMovies={filteredMovies} onSaveMovie={onSaveMovie} onDeleteMovie={onDeleteMovie} isSavedCheck={isSavedCheck} />
     </main>
   )

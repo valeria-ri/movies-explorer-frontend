@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
-import useForm from '../../hooks/useForm';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import Preloader from '../Preloader/Preloader';
 import './SearchForm.css';
 
-function SearchForm({form, handleChange, searchMovies}) {
+function SearchForm({form, handleChange, searchMovies, errorMessage}) {
 
   function handleSubmit (e) {
     e.preventDefault();
     searchMovies(form.keyword, form.checkbox);
   }
+
+  const getErrorClassName = `search-form__input-error ${errorMessage ? 'search-form__input-error_visible' : ''}`;
 
   return (
     <section className='search-form'>
@@ -28,6 +28,7 @@ function SearchForm({form, handleChange, searchMovies}) {
             />
             <button className='search-form__button button' type='submit' />
           </fieldset>
+          <span className={getErrorClassName}>{errorMessage}</span>
             <FilterCheckbox onChange={handleChange} value={form.checkbox} />
         </form>
       </div>
