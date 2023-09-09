@@ -1,5 +1,6 @@
 import { MOVIES_URL } from "./constants";
 
+// ПРИВЕДЕНИЕ ФОРМАТА ИСХОДНОГО ОБЪЕКТА К НУЖНОМУ ОБРАЗЦУ
 function moviesFormat(movies) {
   return movies.map((movie) => {
     return {
@@ -18,10 +19,12 @@ function moviesFormat(movies) {
   })
 }
 
+// ОТОБРАЖЕНИЕ СТРОКИ ДЛИТЕЛЬНОСТИ ФИЛЬМА
 function durationFormat(time) {
   return `${Math.floor(time / 60)}ч ${time % 60}м`;
 }
 
+// ФИЛЬТРАЦИЯ ФИЛЬМОВ ПО КЛЮЧЕВОМУ СЛОВУ И ДЛИТЕЛЬНОСТИ
 function filterMovies(movies, keyword, isShort) {
   const checkInclude = (item) => {
     return item.toLowerCase().includes(keyword.toLowerCase())
@@ -41,8 +44,26 @@ function filterMovies(movies, keyword, isShort) {
   }
 }
 
+// ОТОБРАЖЕНИЕ КОЛИЧЕСТВА КАРТОЧЕК В ЗАВИСИМОСТИ ОТ ШИРИНЫ ЭКРАНА
+function countInitialMovies(width) {
+  let moviesAmount;
+  if (width < 768) moviesAmount = 5;
+  if (width >= 768) moviesAmount = 8;
+  if (width >= 1280) moviesAmount = 12;
+  return moviesAmount;
+}
+
+function countAddedMovies(width) {
+  let addAmount;
+  if (width < 1280) addAmount = 2;
+  if (width >= 1280) addAmount = 3;
+  return addAmount;
+}
+
 export {
   moviesFormat,
   durationFormat,
-  filterMovies
+  filterMovies,
+  countInitialMovies,
+  countAddedMovies,
 };
