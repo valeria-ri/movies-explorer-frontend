@@ -22,4 +22,6 @@ MoviesExplorer — сервис поиска фильмов по ключевы�
 Домен бэкенда: https://api.valeriari.movies.nomoredomains.xyz  
 Репозиторий фронтенда: https://github.com/valeria-ri/movies-explorer-frontend  
 Домен фронтенда: valeriari.movies-explorer.nomoredomains.xyz  
-Макет в Figma: [ссылка в Figma](https://www.figma.com/file/Ihs8mp1KFKIEjNOnpY1kOD/Diploma-(Copy)?type=design&node-id=41156%3A25942&mode=dev) или [файл макета в диске](https://disk.yandex.ru/d/3ZoaMOek0y7f4w)
+Макет в Figma: [ссылка в Figma](https://www.figma.com/file/Ihs8mp1KFKIEjNOnpY1kOD/Diploma-(Copy)?type=design&node-id=41156%3A25942&mode=dev) или [файл макета в диске](https://disk.yandex.ru/d/3ZoaMOek0y7f4w)  
+  
+P.S. Проект начат в 62 когорте, когда макет генерировался при помощи плагина
