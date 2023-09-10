@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import isEmail from 'validator/lib/isEmail';
+import { nameRegEx } from '../utils/constants';
 
 const useForm = (initialState) => {
   const [form, setForm] = useState(initialState);
@@ -8,19 +9,25 @@ const useForm = (initialState) => {
   
   const handleChange = (e) => {
     const input = e.target;
-    const customErrorMessage = 'Неверный формат email';
+    const customErrorMessage = {
+      email: 'Неверный формат email',
+      name: 'Имя может содержать латиницу, кириллицу, пробел и тире',
+    };
 
     const isInputValid = (input) => {
       if (input.type === 'email') {
         return isEmail(input.value);
+      }
+      if (input.name === 'name') {
+        return nameRegEx.test(input.value);
       }
       return true;
     }
     
     setErrors({
       ...errors,
-      [input.name]: input.type === 'email' && !isInputValid(input) 
-        ? customErrorMessage 
+      [input.name]: !isInputValid(input) 
+        ? customErrorMessage[input.name]
         : input.validationMessage,
     })
 
