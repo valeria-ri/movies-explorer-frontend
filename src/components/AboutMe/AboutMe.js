@@ -1,5 +1,5 @@
 import './AboutMe.css';
-import aboutMeImg from '../../images/about-me-image.png';
+import aboutMeImg from '../../images/about-me-image.jpg';
 
 function AboutMe() {
   return (
@@ -9,13 +9,14 @@ function AboutMe() {
         <div className='about-me__content'>
           <div className='about-me__info'>
             <article className='about-me__info-article'>
-              <h3 className='about-me__name'>Виталий</h3>
-              <h4 className='about-me__job'>Фронтенд-разработчик, 30 лет</h4>
+              <h3 className='about-me__name'>Валерия</h3>
+              <h4 className='about-me__job'>Фронтенд-разработчик, (почти) 24 года</h4>
               <p className='about-me__text'>
-                Я родился и живу в Саратове, закончил факультет экономики СГУ. У меня есть жена и дочь. 
-                Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить. С 2015 года работал 
-                в компании «СКБ Контур». После того, как прошёл курс по веб-разработке, начал заниматься 
-                фриланс-заказами и ушёл с постоянной работы.
+                Привет! Я начинающий фронтенд-разработчик из Москвы. По образованию экономист и project-менеджер, 
+                но, учась в университете, поняла, что душа моя больше лежит к творчеству и IT. Без долгих поисков 
+                выбор пал на фронтенд-разработку, поскольку мне нравится сразу видеть результат своей работы.
+                Это похоже на &#10024;магию&#10024;: ты пишешь код-заклинание и элементы твоей веб-страницы 
+                или приложения оживают.<br/><br/>В данный момент занимаюсь фриланс- и пет-проектами.
               </p>
             </article>
             <a className='about-me__link link' href='https://github.com/valeria-ri' target='_blank' rel='noreferrer'>Github</a>
