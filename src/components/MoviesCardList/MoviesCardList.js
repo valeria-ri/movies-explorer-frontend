@@ -16,7 +16,7 @@ function MoviesCardList({ filteredMovies, onSaveMovie, onDeleteMovie, isSavedChe
   useEffect(() => {
     setMoviesAmount(countInitialMovies(windowWidth));
     setAddAmount(countAddedMovies(windowWidth));
-  }, [windowWidth]);
+  }, [windowWidth, filteredMovies]);
 
   const limitedMovies = filteredMovies.slice(0, moviesAmount);
   
