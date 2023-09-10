@@ -34,6 +34,13 @@
   padding: 11px 0 9px;
 }
 
+.movies-card-list__not-found {
+  text-align: center;
+  font-size: 20px;
+  margin: 0;
+  padding: 50px 20px;
+}
+
 @media screen and (max-width: 1080px) {
   .movies-card-list__grid {
     grid-template-columns: repeat(auto-fit, 339px);

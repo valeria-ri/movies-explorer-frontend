@@ -66,7 +66,7 @@ function MoviePage({ getMovies, movies, onSaveMovie, onDeleteMovie, isSavedCheck
   return (
     <main className='content'>
       <SearchForm form={form} handleChange={handleChange} searchMovies={searchMovies} errorMessage={errorMessage} />
-      <MoviesCardList filteredMovies={filteredMovies} onSaveMovie={onSaveMovie} onDeleteMovie={onDeleteMovie} isSavedCheck={isSavedCheck} />
+      <MoviesCardList filteredMovies={filteredMovies} onSaveMovie={onSaveMovie} onDeleteMovie={onDeleteMovie} isSavedCheck={isSavedCheck} errorMessage={errorMessage}/>
     </main>
   )
 }

@@ -5,7 +5,7 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 import { countAddedMovies, countInitialMovies } from '../../utils/utils';
 
-function MoviesCardList({ filteredMovies, onSaveMovie, onDeleteMovie, isSavedCheck }) {
+function MoviesCardList({ filteredMovies, onSaveMovie, onDeleteMovie, isSavedCheck, errorMessage }) {
   const location = useLocation().pathname;
   const [moviesAmount, setMoviesAmount] = useState('');
   const [addAmount, setAddAmount] = useState('');
@@ -25,6 +25,7 @@ function MoviesCardList({ filteredMovies, onSaveMovie, onDeleteMovie, isSavedChe
     
   return (
     <section className='movies-card-list'>
+      {filteredMovies.length === 0 && !errorMessage && <p className='movies-card-list__not-found'>Ничего не найдено</p>}
       <ul className='movies-card-list__grid'>
         {
           ((location === '/movies') ? limitedMovies : filteredMovies)
