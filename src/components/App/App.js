@@ -4,6 +4,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { mainApi } from '../../utils/MainApi';
 import { moviesApi } from '../../utils/MoviesApi';
+import { moviesFormat } from '../../utils/utils';
 
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -18,7 +19,6 @@ import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Preloader from '../Preloader/Preloader';
 
-import { moviesFormat } from '../../utils/utils';
 import './App.css';
 
 function App() {
@@ -89,7 +89,10 @@ function App() {
   }
 
   function logOut() {
-    localStorage.removeItem('jwt');
+    localStorage.clear();
+    setCurrentUser({});
+    setMovies([]);
+    setSavedMovies([]);
     setIsLoggedIn(false);
   }
 
@@ -118,8 +121,7 @@ function App() {
   }
 
   function getMovies() {
-    setIsLoading(true);
-    moviesApi
+    return moviesApi
       .getMovies()
       .then(newMovies => {
         const formattedMovies = moviesFormat(newMovies)
@@ -127,7 +129,6 @@ function App() {
         localStorage.setItem('movies', JSON.stringify(formattedMovies));
       })
       .catch(console.error)
-      .finally(() => setIsLoading(false))
   }
 
   // СОХРАНЕНИЕ И УДАЛЕНИЕ ФИЛЬМОВ

@@ -4,8 +4,9 @@ import useResize from '../../hooks/useResize';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 import { countAddedMovies, countInitialMovies } from '../../utils/utils';
+import Preloader from '../Preloader/Preloader';
 
-function MoviesCardList({ filteredMovies, onSaveMovie, onDeleteMovie, isSavedCheck, errorMessage }) {
+function MoviesCardList({ filteredMovies, onSaveMovie, onDeleteMovie, isSavedCheck, errorMessage, notFoundMessage, isLoading }) {
   const location = useLocation().pathname;
   const [moviesAmount, setMoviesAmount] = useState('');
   const [addAmount, setAddAmount] = useState('');
@@ -25,7 +26,13 @@ function MoviesCardList({ filteredMovies, onSaveMovie, onDeleteMovie, isSavedChe
     
   return (
     <section className='movies-card-list'>
-      {filteredMovies.length === 0 && !errorMessage && <p className='movies-card-list__not-found'>Ничего не найдено</p>}
+      {
+        filteredMovies.length === 0 
+        && !errorMessage 
+        && notFoundMessage 
+        && <p className='movies-card-list__not-found'>{notFoundMessage}</p>
+      }
+      {location === '/movies' && isLoading && <Preloader />}
       <ul className='movies-card-list__grid'>
         {
           ((location === '/movies') ? limitedMovies : filteredMovies)
