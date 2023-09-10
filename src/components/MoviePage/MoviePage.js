@@ -15,20 +15,24 @@ function MoviePage({ getMovies, movies, onSaveMovie, onDeleteMovie, isSavedCheck
 
   useEffect(() => {
     if (movies.length === 0 && getMovies) return;
+    if (!form.keyword && location === '/movies') {
+      setFilteredMovies([]);
+      setErrorMessage('Нужно ввести ключевое слово');
+      return;
+    }
     setFilteredMovies(filterMovies(movies, form.keyword, form.checkbox));
   }, [movies, form.checkbox]);
 
   function searchMovies (keyword, isShort) {
     if (movies.length === 0 && getMovies) {
+      setErrorMessage('');
       getMovies();
+    } else if (!keyword && location === '/movies') {
+      setFilteredMovies([]);
+      setErrorMessage('Нужно ввести ключевое слово');
     } else {
-      if (keyword.length === 0) {
-        setErrorMessage('Нужно ввести ключевое слово');
-        setFilteredMovies([]);
-      } else {
-        setErrorMessage('');
-        setFilteredMovies(filterMovies(movies, keyword, isShort));
-      }      
+      setErrorMessage('');
+      setFilteredMovies(filterMovies(movies, keyword, isShort));
     }
   }
 
