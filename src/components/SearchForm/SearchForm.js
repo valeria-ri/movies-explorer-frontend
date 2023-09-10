@@ -1,5 +1,4 @@
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-import Preloader from '../Preloader/Preloader';
 import './SearchForm.css';
 
 function SearchForm({form, handleChange, searchMovies, errorMessage}) {

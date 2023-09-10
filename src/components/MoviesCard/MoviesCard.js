@@ -1,7 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { durationFormat } from '../../utils/utils';
 import './MoviesCard.css';
-import { useState } from 'react';
 
 function MoviesCard({movie, onSaveMovie, onDeleteMovie, isSavedCheck}) {
   const location = useLocation().pathname;

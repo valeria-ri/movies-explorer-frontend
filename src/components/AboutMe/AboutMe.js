@@ -10,7 +10,7 @@ function AboutMe() {
           <div className='about-me__info'>
             <article className='about-me__info-article'>
               <h3 className='about-me__name'>Валерия</h3>
-              <h4 className='about-me__job'>Фронтенд-разработчик, (почти) 24 года</h4>
+              <h4 className='about-me__job'>Фронтенд-разработчик (почти) 24 года</h4>
               <p className='about-me__text'>
                 Привет! Я начинающий фронтенд-разработчик из Москвы. По образованию экономист и project-менеджер, 
                 но, учась в университете, поняла, что душа моя больше лежит к творчеству и IT. Без долгих поисков 

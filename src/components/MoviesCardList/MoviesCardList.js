@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import useResize from '../../hooks/useResize';
 import MoviesCard from '../MoviesCard/MoviesCard';
+import Preloader from '../Preloader/Preloader';
 import './MoviesCardList.css';
 import { countAddedMovies, countInitialMovies } from '../../utils/utils';
-import Preloader from '../Preloader/Preloader';
 
 function MoviesCardList({ filteredMovies, onSaveMovie, onDeleteMovie, isSavedCheck, errorMessage, notFoundMessage, isLoading }) {
   const location = useLocation().pathname;
