@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import './AuthBlock.css';
 import logo from '../../images/logo.svg';
 
-function AuthBlock({handleSubmit, isValid, welcomeText, formName, children, btnText, questionText, linkPath, linkText}) {
+function AuthBlock({handleSubmit, isValid, welcomeText, formName, children, btnText, questionText, linkPath, linkText, serverMessage}) {
   return(
     <section className='auth'>
       <Link className='auth__logo-link link' to='/'>
@@ -12,6 +12,7 @@ function AuthBlock({handleSubmit, isValid, welcomeText, formName, children, btnT
       <form className='auth__form' name={formName} onSubmit={handleSubmit} noValidate>
         {children}
         <div className='auth__actions'>
+          <span className='auth__server-message'>{serverMessage}</span>
           <button className='auth__submit button' type='submit' disabled={!isValid}>{btnText}</button>
           <p className='auth__question'>
             {questionText}

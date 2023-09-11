@@ -1,7 +1,10 @@
 import AuthBlock from '../AuthBlock/AuthBlock';
 import useForm from '../../hooks/useForm';
+import { CUSTOM_MESSAGE } from '../../utils/constants';
+import { useState } from 'react';
 
 function Login({loginUser}) {
+  const [serverMessage, setServerMessage] = useState('');
   
   const { form, errors, handleChange, isValid } = useForm({
     email: '',
@@ -10,7 +13,13 @@ function Login({loginUser}) {
 
   function handleSubmit (e) {
     e.preventDefault();
-    loginUser(form);
+    loginUser(form)
+      .catch((errorCode) => {
+        if (errorCode === 400) return setServerMessage(CUSTOM_MESSAGE.BAD_REQUEST);
+        if (errorCode === 401) return setServerMessage(CUSTOM_MESSAGE.USER_NOT_FOUND);
+        if (errorCode === 409) return setServerMessage(CUSTOM_MESSAGE.CONFLICT);
+        setServerMessage(CUSTOM_MESSAGE.SERVER_ERROR);
+      });
   }
 
   function getErrorClassName (name) {
@@ -28,6 +37,7 @@ function Login({loginUser}) {
         questionText='Ещё не зарегистрированы?'
         linkPath='/signup'
         linkText='Регистрация'
+        serverMessage={serverMessage}
       >
         <fieldset className='auth__field'>
           <label className='auth__input-title'>E-mail</label>

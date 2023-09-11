@@ -1,7 +1,10 @@
 import AuthBlock from '../AuthBlock/AuthBlock';
 import useForm from '../../hooks/useForm';
+import { useState } from 'react';
+import { CUSTOM_MESSAGE } from '../../utils/constants';
 
 function Register({registerUser}) {
+  const [serverMessage, setServerMessage] = useState('');
 
   const { form, errors, handleChange, isValid } = useForm({
     email: '',
@@ -11,7 +14,12 @@ function Register({registerUser}) {
 
   function handleSubmit (e) {
     e.preventDefault();
-    registerUser(form);
+      registerUser(form)
+      .catch((errorCode) => {
+        if (errorCode === 400) return setServerMessage(CUSTOM_MESSAGE.BAD_REQUEST);
+        if (errorCode === 409) return setServerMessage(CUSTOM_MESSAGE.CONFLICT);
+        setServerMessage(CUSTOM_MESSAGE.SERVER_ERROR);
+      });
   }
 
   function getErrorClassName (name) {
@@ -29,6 +37,7 @@ function Register({registerUser}) {
         questionText='Уже зарегистрированы?'
         linkPath='/signin'
         linkText='Войти'
+        serverMessage={serverMessage}
       >
         <fieldset className='auth__field'>
           <label className='auth__input-title'>Имя</label>

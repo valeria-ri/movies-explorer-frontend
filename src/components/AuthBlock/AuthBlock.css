@@ -84,6 +84,17 @@
   opacity: 1;
 }
 
+.auth__server-message {
+  color: #EE3465;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 400;
+  display: block;
+  align-self: center;
+  margin: 10px 0;
+  padding: 0;
+}
+
 .auth__submit {
   border: 0;
   width: 100%;

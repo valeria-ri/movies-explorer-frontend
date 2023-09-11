@@ -70,14 +70,13 @@ function App() {
   // РЕГИСТРАЦИЯ И АВТОРИЗАЦИЯ
 
   function registerUser({ email, password, name }) {
-    mainApi
+    return mainApi
       .register({ email, password, name })
       .then(() => loginUser({ email, password }))
-      .catch(console.error);
   }
 
   function loginUser({ email, password }) {
-    mainApi
+    return mainApi
       .authorize({ email, password })
       .then(res => {
         setIsLoggedIn(true);
@@ -85,7 +84,6 @@ function App() {
         localStorage.setItem('jwt', res.token);
         navigate('/movies');
       })
-      .catch(console.error);
   }
 
   function logOut() {

@@ -12,6 +12,7 @@ const CUSTOM_MESSAGE = {
   SERVER_ERROR: 'На сервере произошла ошибка',
   NO_KEYWORD: 'Нужно ввести ключевое слово',
   MOVIE_NOT_FOUND: 'Ничего не найдено',
+  USER_NOT_FOUND: 'Пользователь не найден',
   SUCCESS: 'Данные обновлены',
 };
 
