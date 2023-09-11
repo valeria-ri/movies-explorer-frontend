@@ -32,7 +32,9 @@ function MoviesCard({movie, onSaveMovie, onDeleteMovie, isSavedCheck}) {
         {(location === '/movies') && <button className={btnClassName} type='button' onClick={!isSaved ? handleSaveClick : handleDeleteClick} />}
         {(location === '/saved-movies') && <button className={btnClassName} type='button' onClick={handleDeleteClick} />}
       </div>
-      <img className='movies-card__image' src={movie.image} alt={movie.nameRU} />
+      <a className='movies-card__image-link link' href={movie.trailerLink} target='_blank' rel='noreferrer'>
+        <img className='movies-card__image' src={movie.image} alt={movie.nameRU} />
+      </a>
     </li>
   )
 }
