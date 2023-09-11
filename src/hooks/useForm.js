@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import isEmail from 'validator/lib/isEmail';
-import { nameRegEx } from '../utils/constants';
+import { NAME_REGEX } from '../utils/constants';
 
 const useForm = (initialState) => {
   const [form, setForm] = useState(initialState);
@@ -19,7 +19,7 @@ const useForm = (initialState) => {
         return isEmail(input.value);
       }
       if (input.name === 'name') {
-        return nameRegEx.test(input.value);
+        return NAME_REGEX.test(input.value);
       }
       return true;
     }

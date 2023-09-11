@@ -1,4 +1,4 @@
-import { MOVIES_URL } from "./constants";
+import { MOVIES_URL, SHORT_MOVIE, SCREEN_SIZE, MOVIES_AMOUNT, ADDED_MOVIES_AMOUNT } from "./constants";
 
 // ПРИВЕДЕНИЕ ФОРМАТА ИСХОДНОГО ОБЪЕКТА К НУЖНОМУ ОБРАЗЦУ
 function moviesFormat(movies) {
@@ -36,7 +36,7 @@ function filterMovies(movies, keyword, isShort) {
 
   if (isShort) {
     const shortMovies = filteredByKeywordMovies.filter((movie) => {
-      return movie.duration <= 40;
+      return movie.duration <= SHORT_MOVIE;
     })
     return shortMovies;
   } else {
@@ -47,16 +47,16 @@ function filterMovies(movies, keyword, isShort) {
 // ОТОБРАЖЕНИЕ КОЛИЧЕСТВА КАРТОЧЕК В ЗАВИСИМОСТИ ОТ ШИРИНЫ ЭКРАНА
 function countInitialMovies(width) {
   let moviesAmount;
-  if (width < 768) moviesAmount = 5;
-  if (width >= 768) moviesAmount = 8;
-  if (width >= 1280) moviesAmount = 12;
+  if (width < SCREEN_SIZE.M) moviesAmount = MOVIES_AMOUNT.S;
+  if (width >= SCREEN_SIZE.M) moviesAmount = MOVIES_AMOUNT.M;
+  if (width >= SCREEN_SIZE.L) moviesAmount = MOVIES_AMOUNT.L;
   return moviesAmount;
 }
 
 function countAddedMovies(width) {
   let addAmount;
-  if (width < 1280) addAmount = 2;
-  if (width >= 1280) addAmount = 3;
+  if (width < SCREEN_SIZE.L) addAmount = ADDED_MOVIES_AMOUNT.S;
+  if (width >= SCREEN_SIZE.L) addAmount = ADDED_MOVIES_AMOUNT.L;
   return addAmount;
 }
 

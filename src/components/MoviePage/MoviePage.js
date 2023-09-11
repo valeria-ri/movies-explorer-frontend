@@ -4,6 +4,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import { filterMovies } from '../../utils/utils';
 import useForm from '../../hooks/useForm';
+import { CUSTOM_MESSAGE } from '../../utils/constants';
 
 function MoviePage({ getMovies, movies, onSaveMovie, onDeleteMovie, isSavedCheck }) {
   const location = useLocation().pathname;
@@ -19,7 +20,7 @@ function MoviePage({ getMovies, movies, onSaveMovie, onDeleteMovie, isSavedCheck
     if (movies.length === 0 && getMovies) return;
     if (!form.keyword && location === '/movies') {
       setFilteredMovies([]);
-      setErrorMessage('Нужно ввести ключевое слово');
+      setErrorMessage(CUSTOM_MESSAGE.NO_KEYWORD);
       return;
     }
     setFilteredMovies(filterMovies(movies, form.keyword, form.checkbox));
@@ -33,7 +34,7 @@ function MoviePage({ getMovies, movies, onSaveMovie, onDeleteMovie, isSavedCheck
         .finally(() => setIsLoading(false));
     } else if (!keyword && location === '/movies') {
       setFilteredMovies([]);
-      setErrorMessage('Нужно ввести ключевое слово');
+      setErrorMessage(CUSTOM_MESSAGE.NO_KEYWORD);
     } else {
       setErrorMessage('');
       setFilteredMovies(filterMovies(movies, keyword, isShort));
@@ -46,7 +47,7 @@ function MoviePage({ getMovies, movies, onSaveMovie, onDeleteMovie, isSavedCheck
       filteredMovies,
       form,
     }));
-    setNotFoundMessage((filteredMovies.length === 0) ? 'Ничего не найдено' : '');
+    setNotFoundMessage((filteredMovies.length === 0) ? CUSTOM_MESSAGE.MOVIE_NOT_FOUND : '');
   }, [filteredMovies, form.checkbox]);
 
   function restorePrevSearch() {

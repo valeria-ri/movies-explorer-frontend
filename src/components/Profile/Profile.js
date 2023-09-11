@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import useForm from '../../hooks/useForm';
 import './Profile.css';
+import { CUSTOM_MESSAGE } from '../../utils/constants';
 
 function Profile({handleUpdateUser, logOut}) {
   const [isEdited, setIsEdited] = useState(false);
@@ -32,14 +33,14 @@ function Profile({handleUpdateUser, logOut}) {
     handleUpdateUser(form)
       .then(() => {
         setIsEdited(false);
-        setServerMessage('Данные обновлены')
+        setServerMessage(CUSTOM_MESSAGE.SUCCESS)
         setServerMessageSuccessMode(true);
       })
       .catch((errorCode) => {
         setServerMessageSuccessMode(false);
-        if (errorCode === 400) return setServerMessage('Данные некорректны');
-        if (errorCode === 409) return setServerMessage('Пользователь с данным email уже существует');
-        setServerMessage('На сервере произошла ошибка')
+        if (errorCode === 400) return setServerMessage(CUSTOM_MESSAGE.BAD_REQUEST);
+        if (errorCode === 409) return setServerMessage(CUSTOM_MESSAGE.CONFLICT);
+        setServerMessage(CUSTOM_MESSAGE.SERVER_ERROR)
       });
   }
 
