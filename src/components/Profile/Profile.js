@@ -23,6 +23,8 @@ function Profile({handleUpdateUser, logOut}) {
     })
   }, [currentUser]);
 
+  const isNotEqual = form.email !== currentUser.email || form.name !== currentUser.name;
+
   useEffect(() => {
     if (!isEdited) return;
     setServerMessage('');
@@ -44,7 +46,8 @@ function Profile({handleUpdateUser, logOut}) {
       });
   }
 
-  function handleEditMode() {
+  function handleEditMode(e) {
+    e.preventDefault();
     setServerMessage('');
     setIsEdited(true);
   }
@@ -72,6 +75,7 @@ function Profile({handleUpdateUser, logOut}) {
             disabled={!isEdited}
             minLength='2'
             maxLength='30'
+            required
           />
         </fieldset>
         <span className={getErrorClassName('name')}>{errors.name}</span>
@@ -86,13 +90,14 @@ function Profile({handleUpdateUser, logOut}) {
             id='email'
             onChange={handleChange}
             disabled={!isEdited}
+            required
           />
         </fieldset>
         <span className={getErrorClassName('email')}>{errors.email}</span>
         {isEdited ? 
           <div className='profile__actions profile__actions_type_edit'>
             <span className={serverMessageClassName}>{serverMessage}</span>
-            <button className='profile__submit button' type='submit' disabled={!isValid}>Сохранить</button>
+            <button className='profile__submit button' type='submit' disabled={!isValid || !isNotEqual}>Сохранить</button>
           </div>
           :
           <div className='profile__actions profile__actions_type_profile'>
