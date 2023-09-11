@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import isEmail from 'validator/lib/isEmail';
 import { NAME_REGEX } from '../utils/constants';
 
@@ -34,10 +34,15 @@ const useForm = (initialState) => {
     setForm({
       ...form,
       [input.name]: input.type === 'checkbox' ? input.checked : input.value,
-    });
-
-    setIsValid(e.target.closest('form').checkValidity() && isInputValid(e.target));
+    });    
   };
+
+  useEffect(() => {
+    const hasError = Object.values(errors).some(error => error);
+    const hasEmptyValues = Object.values(form).some(value => !value);
+
+    setIsValid(!hasError && !hasEmptyValues);
+  }, [errors, form])
 
   const resetForm = useCallback(
     (newForm = {}, newErrors = {}, newIsValid = false) => {
