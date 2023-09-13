@@ -1,16 +1,43 @@
-import React from 'react';
 import AuthBlock from '../AuthBlock/AuthBlock';
+import useForm from '../../hooks/useForm';
+import { useState } from 'react';
+import { CUSTOM_MESSAGE } from '../../utils/constants';
 
-function Register() {
+function Register({registerUser}) {
+  const [serverMessage, setServerMessage] = useState('');
+
+  const { form, errors, handleChange, isValid } = useForm({
+    email: '',
+    password: '',
+    name: '',
+  });
+
+  function handleSubmit (e) {
+    e.preventDefault();
+      registerUser(form)
+      .catch((errorCode) => {
+        if (errorCode === 400) return setServerMessage(CUSTOM_MESSAGE.BAD_REQUEST);
+        if (errorCode === 409) return setServerMessage(CUSTOM_MESSAGE.CONFLICT);
+        setServerMessage(CUSTOM_MESSAGE.SERVER_ERROR);
+      });
+  }
+
+  function getErrorClassName (name) {
+    return `auth__input-error ${errors[name] ? 'auth__input-error_visible' : ''}`
+  }
+
   return(
     <main className='content'>
       <AuthBlock 
+        handleSubmit={handleSubmit}
+        isValid={isValid}
         welcomeText='Добро пожаловать!'
         formName='signup'
         btnText='Зарегистрироваться'
         questionText='Уже зарегистрированы?'
         linkPath='/signin'
         linkText='Войти'
+        serverMessage={serverMessage}
       >
         <fieldset className='auth__field'>
           <label className='auth__input-title'>Имя</label>
@@ -20,8 +47,13 @@ function Register() {
             name='name'
             placeholder='Имя'
             id='name'
+            value={form.name}
+            onChange={handleChange}
+            minLength='2'
+            maxLength='30'
+            required
           />
-          <span className='auth__input-error auth__input-error_type_username'></span>
+          <span className={getErrorClassName('name')}>{errors.name}</span>
         </fieldset>
         <fieldset className='auth__field'>
           <label className='auth__input-title'>E-mail</label>
@@ -31,8 +63,11 @@ function Register() {
             name='email'
             placeholder='E-mail'
             id='email'
+            value={form.email}
+            onChange={handleChange}
+            required
           />
-          <span className='auth__input-error auth__input-error_type_email'></span>
+          <span className={getErrorClassName('email')}>{errors.email}</span>
         </fieldset>
         <fieldset className='auth__field'>
           <label className='auth__input-title'>Пароль</label>
@@ -42,8 +77,13 @@ function Register() {
             name='password'
             placeholder='Пароль'
             id='password'
+            value={form.password}
+            onChange={handleChange}
+            minLength='8'
+            required
+            noValidate
           />
-          <span className='auth__input-error auth__input-error_type_password'></span>
+          <span className={getErrorClassName('password')}>{errors.password}</span>
         </fieldset>
       </AuthBlock>
     </main>

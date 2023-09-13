@@ -1,17 +1,16 @@
-import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
 import './Header.css';
 import logo from '../../images/logo.svg';
 
 function Header({ isLoggedIn, onBurgerClick }) {
-  const location = useLocation();
+  const location = useLocation().pathname;
   const headerClassName = `header${
-    (location.pathname === '/') ? '_type_landing' : 
+    (location === '/') ? '_type_landing' : 
     (
-      location.pathname === '/movies' || 
-      location.pathname === '/saved-movies' || 
-      location.pathname === '/profile'
+      location === '/movies' || 
+      location === '/saved-movies' || 
+      location === '/profile'
     ) ? '' :
     '_hidden'
   }`;

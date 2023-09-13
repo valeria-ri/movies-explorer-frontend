@@ -8,11 +8,6 @@
   '...'
   'error'
   'link';
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box; */
 }
 
 .not-found__error {
@@ -34,12 +29,15 @@
 }
 
 .not-found__link {
+  width: max-content;
   grid-area: link;
+  justify-self: center;
   align-self: end;
-  display: block;
   text-align: center;
   text-decoration: none;
   color: #4285F4;
+  background-color: transparent;
+  border: 0;
   font-size: 14px;
   font-weight: 400;
   margin: 0 0 60px;

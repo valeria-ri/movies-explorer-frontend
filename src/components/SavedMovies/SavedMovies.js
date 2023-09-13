@@ -1,13 +1,8 @@
-import React from 'react';
-import SearchForm from '../SearchForm/SearchForm';
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import MoviePage from '../MoviePage/MoviePage';
 
-function SavedMovies() {
+function SavedMovies({ movies, onDeleteMovie, isSavedCheck }) {
   return (
-    <main className='content'>
-      <SearchForm />
-      <MoviesCardList />
-    </main>
+    <MoviePage movies={movies} onDeleteMovie={onDeleteMovie} isSavedCheck={isSavedCheck} />
   )
 }
 

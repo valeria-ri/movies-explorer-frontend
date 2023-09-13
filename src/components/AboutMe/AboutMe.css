@@ -49,12 +49,15 @@
   color: #fff;
   font-size: 14px;
   font-weight: 500;
+  margin-top: 30px;
   justify-self: end;
 }
 
 .about-me__image {
   width: 270px;
   border-radius: 10px;
+  object-fit: cover;
+  object-position: left;
 }
 
 @media screen and (max-width: 1080px) {
@@ -125,5 +128,9 @@
   .about-me__image {
     width: 100%;
     max-width: 292px;
+  }
+
+  .about-me__link {
+    margin-top: 0;
   }
 }

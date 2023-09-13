@@ -77,17 +77,29 @@
   opacity: 0;
   margin: 0;
   padding: 0;
+  transition: opacity .3s ease;
 }
 
 .auth__input-error_visible {
   opacity: 1;
 }
 
+.auth__server-message {
+  color: #EE3465;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 400;
+  display: block;
+  align-self: center;
+  margin: 10px 0;
+  padding: 0;
+}
+
 .auth__submit {
   border: 0;
   width: 100%;
   border-radius: 3px;
-  background: #4285F4;
+  background-color: #4285F4;
   color: #FFF;
   text-align: center;
   font-size: 14px;
@@ -95,6 +107,11 @@
   margin: 60px 0 0;
   padding: 13px 0 15px;
   box-sizing: border-box;
+}
+
+.auth__submit:disabled {
+  background-color: #F8F8F8;
+  color: #C2C2C2;
 }
 
 .auth__question {

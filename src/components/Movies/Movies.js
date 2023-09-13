@@ -1,15 +1,8 @@
-import React from 'react';
-import SearchForm from '../SearchForm/SearchForm';
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
-// import Preloader from '../Preloader/Preloader';
+import MoviePage from '../MoviePage/MoviePage';
 
-function Movies() {
+function Movies({getMovies, movies, onSaveMovie, onDeleteMovie, isSavedCheck}) {
   return (
-    <main className='content'>
-      <SearchForm />
-      {/* <Preloader /> */}
-      <MoviesCardList />
-    </main>
+    <MoviePage getMovies={getMovies} movies={movies} onSaveMovie={onSaveMovie} onDeleteMovie={onDeleteMovie} isSavedCheck={isSavedCheck} />
   )
 }
 
